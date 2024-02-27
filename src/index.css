@@ -1,0 +1,21 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #fff;
+}
+
+body {
+  padding: 1rem 2rem;
+  background-color: #2a2a2a;
+  font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+  font-weight: 100;
+}
+
+button {
+  color: #000;
+  margin: 10px 6px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 5px;
+}
