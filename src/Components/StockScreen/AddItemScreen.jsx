@@ -1,17 +1,21 @@
-import { useContext, useEffect} from "react"
+import { useContext, useEffect } from "react"
 import { ItemContext } from "../../Hooks/ItemsContext"
 
 import style from "./Stock.module.css"
+import { useLocation } from "react-router-dom"
 
-export default function AddItemScreen({editMode}) {
-  const { itemState, setItemState, stock, setStock, getId, itemId} = useContext(ItemContext)
+export default function AddItemScreen({ editMode }) {
+  const location = useLocation();
+  const {
 
-  if (editMode) {
-    alert('oi')
-  }
+    itemState, setItemState,
+    stock, setStock,
+    getId, itemId,
+    indentifyer
+
+  } = useContext(ItemContext)
 
   const handleChange = (el) => {
-    getId()
     setItemState({
       ...itemState,
       [el.name]: el.value
@@ -20,26 +24,59 @@ export default function AddItemScreen({editMode}) {
 
   const handleSubmit = (ev) => {
     ev.preventDefault()
-    getId()
-    const id = itemId
-    const item = {
-      ...itemState,
-      id: id,
+    if (editMode) {
+      const editItem = stock.find((item) => item.id === indentifyer)
+      editItem.name = itemState.name
+      editItem.price = itemState.price
+      editItem.description = itemState.description
+      editItem.category = itemState.category
+      editItem.quantity = itemState.quantity
+      setItemState({
+        name: '',
+        quantity: 0,
+        description: '',
+        category: "",
+        price: 0,
+        id: '',
+      })
+    } else {
+      getId()
+      const id = itemId
+      const item = {
+        ...itemState,
+        id: id,
+      }
+      if (id !== '') {
+        setStock([...stock, item])
+      } else {
+        throw new Error("O id não foi gerado corretamente, por favor tente novamente!")
+      }
+      setItemState({
+        name: '',
+        quantity: 0,
+        description: '',
+        category: "",
+        price: 0,
+        id: '',
+      })
     }
-    id !== "" ? setStock([...stock, item]) : alert("algo deu errado")
-    setItemState({
-      name: '',
-      quantity: 0,
-      description: '',
-      category: '',
-      price: 0,
-      id: '',
-    })
   }
 
   useEffect(() => {
+    if (!editMode) {
+      setItemState({
+        name: '',
+        quantity: 0,
+        description: '',
+        category: "",
+        price: 0,
+        id: '',
+      })
+    }
     localStorage.setItem("stock", JSON.stringify(stock))
-  }, [stock]);
+  }, [stock, location]);
+
+  document.addEventListener("keydown", (key) => key === "Enter", handleSubmit)
 
   return (
     <div id={style.addItemScreen}>
@@ -47,7 +84,7 @@ export default function AddItemScreen({editMode}) {
         <div id={style.upValues}>
           <div>
             <label htmlFor="itemName">Nome: </label><br />
-            <input type="text" id="itemName" name="name"
+            <input type="text" id="itemName" name="name" required
               value={itemState.name}
               onChange={(el) => handleChange(el.target)}
             />
@@ -68,14 +105,14 @@ export default function AddItemScreen({editMode}) {
           </div>
           <div>
             <label htmlFor="itemCategory">Categoria: </label><br />
-            <select id="itemCategory" name="category"
-              value={itemState.category || ''}
+            <select id="itemCategory" name="category" required
+              value={itemState.category}
               onChange={(el) => handleChange(el.target)}
             >
+              <option value="" >Selecione uma categoria</option>
               <option value="Jogos">Jogo</option>
               <option value="Livros">Livro</option>
               <option value="Eletronicos">Eletrônico</option>
-              <option value="" disabled>Selecione uma categoria</option>
             </select>
           </div>
         </div>

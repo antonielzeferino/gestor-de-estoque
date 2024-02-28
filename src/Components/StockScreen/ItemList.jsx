@@ -1,15 +1,32 @@
-import { useContext } from "react"
-import { Link } from "react-router-dom"
+import { useContext, useEffect } from "react"
+import { Link} from "react-router-dom"
 import { ItemContext } from "../../Hooks/ItemsContext"
 import style from "./Stock.module.css"
 
 export default function ItemList() {
-  const { stock, setStock } = useContext(ItemContext)
+  const { stock, setStock, setItemState , setIndentifyer} = useContext(ItemContext)
 
   const deleteItem = (id) => {
     const newStock = stock.filter((item) => item.id !== id)
     setStock(newStock)
   }
+
+  const editItem = (TargetItemId) => {
+    const currentItem = stock.find((item) => item.id === TargetItemId)
+    setItemState({
+      name: currentItem.name,
+      description: currentItem.description,
+      category: currentItem.category,
+      price: currentItem.price,
+      quantity: currentItem.quantity,
+      id: currentItem.id,
+    })
+    setIndentifyer(currentItem.id)
+  }
+
+  useEffect(() => {
+    localStorage.setItem("stock", JSON.stringify(stock))
+  }, [stock]);
 
   return (
     <div id={style.List}>
@@ -39,10 +56,10 @@ export default function ItemList() {
                     ver
                   </Link>
                 </button>
-                <button className={style.whiteBtn}>
+                <button className={style.whiteBtn} onClick={() => editItem(item.id)}>
                   <Link
                     style={{ textDecoration: "none", color: "#000" }}
-                    to={""}
+                    to={"../edit"}
                   >
                     editar
                   </Link>

@@ -3,7 +3,7 @@ import RootLayout from "./RootLayout"
 import Dashboard from "./Screens/Dashboard/Dashboard"
 import Stock from "./Screens/Stock/Stock"
 import ItemList from "./Components/StockScreen/ItemList"
-import ItemScreen from "./Components/StockScreen/ItemScreen"
+import AddItemScreen from "./Components/StockScreen/AddItemScreen"
 
 const router = createBrowserRouter([{
   path: "/",
@@ -24,7 +24,10 @@ const router = createBrowserRouter([{
           index: true,
         }, { 
           path: "add",
-          element: <ItemScreen edit={true}/>
+          element: <AddItemScreen editMode={false}/>
+        }, {
+          path: "edit",
+          element: <AddItemScreen editMode={true}/>
         }
       ]
     }

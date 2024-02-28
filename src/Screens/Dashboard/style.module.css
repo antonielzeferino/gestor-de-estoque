@@ -1,4 +1,25 @@
 #Dashboard h3{
   font-size: 3rem;
   font-weight: 100;
+  margin-bottom: 1.5rem;
+}
+
+.infoBlocks{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.stockInfo{
+  background-color: #1a1a1a;
+  height: 10vw;
+  padding: 10px 20px;
+}
+
+.stockInfo div {
+  display: flex;
+  height: 80%;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
 }
