@@ -6,7 +6,7 @@ export default function Header() {
     <header>
       <h1>REACT STOCK</h1>
       <nav>
-        <Link style={{textDecoration: "none"}} to={"home"}>Início</Link>
+        <Link style={{textDecoration: "none"}} to={""}>Início</Link>
         <Link style={{textDecoration: "none"}} to={"stock/items"}>Items</Link>
       </nav>
     </header>

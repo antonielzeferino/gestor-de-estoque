@@ -4,30 +4,34 @@ import Dashboard from "./Screens/Dashboard/Dashboard"
 import Stock from "./Screens/Stock/Stock"
 import ItemList from "./Components/StockScreen/ItemList"
 import AddItemScreen from "./Components/StockScreen/AddItemScreen"
+import ShowItem from "./Components/StockScreen/showItem"
 
 const router = createBrowserRouter([{
   path: "/",
   element: <RootLayout />,
   children: [
     {
-      path: "home",
+      path: "",
       element: <Dashboard />,
       index: true,
     },
     {
       path: "stock",
       element: <Stock />,
-      children:[
+      children: [
         {
           path: "items",
-          element: <ItemList/>,
+          element: <ItemList />,
           index: true,
-        }, { 
+        }, {
+          path: "items/:itemId",
+          element: <ShowItem/>
+        }, {
           path: "add",
-          element: <AddItemScreen editMode={false}/>
+          element: <AddItemScreen editMode={false} />
         }, {
           path: "edit",
-          element: <AddItemScreen editMode={true}/>
+          element: <AddItemScreen editMode={true} />
         }
       ]
     }
@@ -35,3 +39,9 @@ const router = createBrowserRouter([{
 }])
 
 export default router
+
+/* 
+path: "products/:productId",
+element: <Product />,
+loader: loadProduct,
+*/

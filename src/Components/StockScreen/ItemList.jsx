@@ -1,10 +1,10 @@
 import { useContext, useEffect } from "react"
-import { Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import { ItemContext } from "../../Hooks/ItemsContext"
 import style from "./Stock.module.css"
 
 export default function ItemList() {
-  const { stock, setStock, setItemState , setIndentifyer} = useContext(ItemContext)
+  const { stock, setStock, setItemState, setIndentifyer } = useContext(ItemContext)
 
   const deleteItem = (id) => {
     const newStock = stock.filter((item) => item.id !== id)
@@ -48,22 +48,17 @@ export default function ItemList() {
               <td>{item.quantity}</td>
               <td>{item.category}</td>
               <td>
-                <button className={style.blueBtn}>
-                  <Link
-                    style={{ textDecoration: "none", color: "#000" }}
-                    to={""}
-                  >
+                <Link to={`${item.id}`}>
+                  <button className={style.blueBtn}>
                     ver
-                  </Link>
-                </button>
-                <button className={style.whiteBtn} onClick={() => editItem(item.id)}>
-                  <Link
-                    style={{ textDecoration: "none", color: "#000" }}
-                    to={"../edit"}
-                  >
+                  </button>
+                </Link>
+
+                <Link to={"../edit"}>
+                  <button className={style.whiteBtn} onClick={() => editItem(item.id)}>
                     editar
-                  </Link>
-                </button>
+                  </button>
+                </Link>
                 <button className={style.redBtn} onClick={() => deleteItem(item.id)}>excluir</button>
               </td>
             </tr>
@@ -74,6 +69,6 @@ export default function ItemList() {
           )}
         </tbody>
       </table>
-    </div>
+    </div >
   )
 }

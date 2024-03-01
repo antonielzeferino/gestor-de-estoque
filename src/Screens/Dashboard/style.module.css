@@ -23,3 +23,29 @@
   justify-content: center;
   font-size: 3rem;
 }
+
+#itemsList{
+  display: flex;
+  width: 100%;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+#runningOutItems, #lastItems{
+  border-collapse: collapse;
+  text-align: start;
+  height: max-content;
+}
+
+table tr th{
+  text-align: start;
+  background-color: #1a1a1a;
+  height: 2rem;
+  padding: .5rem;
+}
+
+tr{
+  height: 2.3rem;
+  text-indent: 5px;
+
+}

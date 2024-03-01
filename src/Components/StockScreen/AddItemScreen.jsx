@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { ItemContext } from "../../Hooks/ItemsContext"
 
 import style from "./Stock.module.css"
@@ -6,16 +6,18 @@ import { useLocation } from "react-router-dom"
 
 export default function AddItemScreen({ editMode }) {
   const location = useLocation();
+  const [saveBtn , setSaveBtn] = useState("salvar");
   const {
 
     itemState, setItemState,
     stock, setStock,
     getId, itemId,
-    indentifyer
+    indentifyer, setIndentifyer
 
   } = useContext(ItemContext)
 
   const handleChange = (el) => {
+    setSaveBtn("salvar")
     setItemState({
       ...itemState,
       [el.name]: el.value
@@ -24,6 +26,7 @@ export default function AddItemScreen({ editMode }) {
 
   const handleSubmit = (ev) => {
     ev.preventDefault()
+    setSaveBtn("salvo")
     if (editMode) {
       const editItem = stock.find((item) => item.id === indentifyer)
       editItem.name = itemState.name
@@ -31,6 +34,7 @@ export default function AddItemScreen({ editMode }) {
       editItem.description = itemState.description
       editItem.category = itemState.category
       editItem.quantity = itemState.quantity
+      setIndentifyer("")
       setItemState({
         name: '',
         quantity: 0,
@@ -49,7 +53,7 @@ export default function AddItemScreen({ editMode }) {
       if (id !== '') {
         setStock([...stock, item])
       } else {
-        throw new Error("O id não foi gerado corretamente, por favor tente novamente!")
+        handleSubmit(ev)
       }
       setItemState({
         name: '',
@@ -73,6 +77,7 @@ export default function AddItemScreen({ editMode }) {
         id: '',
       })
     }
+    setSaveBtn("salvar")
     localStorage.setItem("stock", JSON.stringify(stock))
   }, [stock, location]);
 
@@ -123,7 +128,7 @@ export default function AddItemScreen({ editMode }) {
             onChange={(el) => handleChange(el.target)}
           ></textarea>
         </div>
-        <button className={style.blueBtn}>Salvar</button>
+        <button className={style.blueBtn}>{saveBtn}</button>
       </form>
     </div>
   )
