@@ -17,7 +17,7 @@ Execute o comando npm start para iniciar o servidor de desenvolvimento.
 
 ## imagens do projeto
 
-![inicio](./publi/project-images/todos-os-items.png)
+![inicio](./publi/project-images/inicio.png)
 
 ![inicio](./publi/project-images/todos-os-items.png)
 
