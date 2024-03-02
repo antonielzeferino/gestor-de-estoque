@@ -38,14 +38,14 @@ export default function Dashboard() {
         <div className={style.stockInfo}>
           <p>items recentes</p>
           <div>
-            <span>37</span>
+            <span>{stock.length}</span>
           </div>
         </div>
 
         <div className={style.stockInfo}>
           <p>items acabando</p>
           <div>
-            <span>3</span>
+            <span>{runningOut.length}</span>
           </div>
         </div>
       </div>
@@ -53,7 +53,7 @@ export default function Dashboard() {
         <table id={style.runningOutItems}>
           <thead>
             <tr>
-              <th>items acabando</th>
+              <th>items recentes</th>
               <th>quantidade</th>
               <th>Ação</th>
             </tr>
