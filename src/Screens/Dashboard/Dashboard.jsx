@@ -14,9 +14,15 @@ export default function Dashboard() {
     return iCateg;
   }, {});
   const totalItems = stock.reduce((total, item) => (total + Number(item.quantity)), 0);
-
-  const runningOut = stock.filter((item) => item.quantity <= 10)
-
+  const runningOut = stock.filter((item) => item.quantity <= 10 && item.quantity !== 0 )
+  const recentItems = stock.filter(item => {
+    const creationDate = new Date(Date.parse(item.creationDate))
+    const today = new Date();
+    const differenceInDays = Math.floor((creationDate.getDate() - today.getDate()) / (24 * 60 * 60 * 1000))
+    return differenceInDays <= 10
+  });
+  //86400000 numero referente ao dia em milissegundos 
+ 
   return (
     <div id={style.Dashboard}>
       <h3>Dashboard</h3>
@@ -38,7 +44,7 @@ export default function Dashboard() {
         <div className={style.stockInfo}>
           <p>items recentes</p>
           <div>
-            <span>{stock.length}</span>
+            <span>{recentItems.length}</span>
           </div>
         </div>
 
@@ -59,7 +65,7 @@ export default function Dashboard() {
             </tr>
           </thead>
           <tbody>
-            {stock.length > 0 ? stock.map((item) => (
+            {recentItems.length > 0 ? recentItems.map((item) => (
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{item.quantity}</td>

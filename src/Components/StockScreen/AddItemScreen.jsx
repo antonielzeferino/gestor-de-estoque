@@ -3,10 +3,11 @@ import { ItemContext } from "../../Hooks/ItemsContext"
 
 import style from "./Stock.module.css"
 import { useLocation } from "react-router-dom"
+import getDate from "../../Hooks/getCreationDate";
 
 export default function AddItemScreen({ editMode }) {
   const location = useLocation();
-  const [saveBtn , setSaveBtn] = useState("salvar");
+  const [saveBtn, setSaveBtn] = useState("salvar");
   const {
 
     itemState, setItemState,
@@ -34,6 +35,7 @@ export default function AddItemScreen({ editMode }) {
       editItem.description = itemState.description
       editItem.category = itemState.category
       editItem.quantity = itemState.quantity
+      editItem.editDate = getDate()
       setIndentifyer("")
       setItemState({
         name: '',
@@ -49,6 +51,7 @@ export default function AddItemScreen({ editMode }) {
       const item = {
         ...itemState,
         id: id,
+        creationDate: getDate(),
       }
       if (id !== '') {
         setStock([...stock, item])
@@ -118,6 +121,8 @@ export default function AddItemScreen({ editMode }) {
               <option value="Jogos">Jogo</option>
               <option value="Livros">Livro</option>
               <option value="Eletronicos">Eletrônico</option>
+              <option value="Perfumes">Perfume</option>
+              <option value="Domésticos">Doméstico</option>
             </select>
           </div>
         </div>

@@ -1,6 +1,6 @@
 #addItemScreen {
   width: 60%;
-  margin: 2rem auto;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
 }
@@ -36,7 +36,7 @@ textarea {
 /* list items */
 
 #List{
-  margin: 2rem auto;
+  margin: 0 auto;
 }
 
 .blueBtn {
@@ -66,4 +66,29 @@ tr th {
 
 tr {
   height: 2.3rem;
+}
+
+/* Show items */
+
+
+#showItemName {
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.itemName {
+  max-width: 40%;
+}
+
+.infoItem{
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.infoBlock{
+  padding: 1rem;
+  background-color: #1a1a1a;
 }
