@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 #addItemScreen {
   width: 60%;
   margin: 0 auto;
@@ -35,20 +40,26 @@ textarea {
 
 /* list items */
 
-#List{
+#List {
   margin: 0 auto;
+  max-width: 100%;
+  overflow: auto;
 }
 
 .blueBtn {
   background-color: rgb(63, 154, 204);
 }
 
-.redBtn{
+.redBtn {
   background-color: #ff4043;
 }
 
-.whiteBtn{
+.whiteBtn {
   background-color: #f1f1f1;
+}
+
+.menuBtn {
+  display: none;
 }
 
 table {
@@ -82,13 +93,118 @@ tr {
   max-width: 40%;
 }
 
-.infoItem{
+.infoItem {
   display: flex;
   gap: 1rem;
   margin: 2rem 0;
 }
 
-.infoBlock{
+.infoBlock {
   padding: 1rem;
   background-color: #1a1a1a;
+}
+
+@media (max-width: 768px) {
+  table {
+    width: 60rem;
+  }
+
+  tr th {
+    text-align: start;
+    background-color: #1a1a1a;
+    height: 2rem;
+    padding: 10px;
+  }
+
+  tr {
+    height: 2.3rem;
+  }
+
+  .itemBtn {
+    display: none;
+  }
+
+  .menuBtn {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    margin: 5px auto;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  .menuBtn.active {
+    background-color: rgba(255, 255, 255, 0.24);
+  }
+
+  span{
+    width: 5px;
+    height: 5px;
+    background-color: #fff;
+    font-size: 3rem;
+    border-radius: 50%;
+  }
+
+  @keyframes popup {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Add screen */
+
+  #addItemScreen {
+    display: grid;
+    width: 100%;
+  }
+
+  #addItemScreen form #upValues {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  #addItemScreen form input,
+  select,
+  textarea {
+    width: 100%;
+  }
+
+  /* Show item screen */
+
+
+  #showItemName {
+    font-size: 1.4rem;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  .itemName {
+    max-width: 100%;
+  }
+
+  .infoItem {
+    display: grid;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .infoBlock {
+    padding: 1rem;
+    background-color: #1a1a1a;
+  }
 }

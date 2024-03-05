@@ -25,8 +25,10 @@
 }
 
 #itemsList{
+  margin: 0 auto;
+  max-width: 100%;
+  overflow: auto;
   display: flex;
-  width: 100%;
   gap: 1.5rem;
   margin-top: 2rem;
 }
@@ -48,4 +50,81 @@ tr{
   height: 2.3rem;
   text-indent: 5px;
 
+}
+
+@media (max-width: 750px) {
+  #Dashboard h3{
+    font-size: 2rem;
+    font-weight: 100;
+    margin-bottom: 1rem;
+  }
+  
+  .infoBlocks{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: .5rem;
+  }
+  
+  .stockInfo{
+    background-color: #1a1a1a;
+    height: 20vw;
+    padding: 10px 20px;
+  }
+  
+  .stockInfo div {
+    display: flex;
+    height: 60%;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+  }
+
+  .stockInfo:nth-child(1) p span{
+    display: none;
+  }
+  
+  #itemsList{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  table tr th{
+    text-align: start;
+    background-color: #1a1a1a;
+    height: 2rem;
+    padding: .5rem;
+  }
+  
+  tr{
+    height: 2.3rem;
+    text-indent: 5px;
+  }
+}
+
+@media (max-width:380px) {
+  .infoBlocks{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: .5rem;
+  }
+  
+  .stockInfo{
+    background-color: #1a1a1a;
+    height: 20vw;
+    padding: 10px 20px;
+    width: 70%;
+    margin: 0 auto;
+  }
+  
+  .stockInfo div {
+    display: flex;
+    height: 60%;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+  }
 }

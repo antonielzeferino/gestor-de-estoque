@@ -28,7 +28,7 @@ export default function Dashboard() {
       <h3>Dashboard</h3>
       <div className={style.infoBlocks}>
         <div className={style.stockInfo}>
-          <p>diversidade de items</p>
+          <p>diversidade<span> de itens </span></p>
           <div>
             <span>{Object.keys(uniqueCategories).length}</span>
           </div>

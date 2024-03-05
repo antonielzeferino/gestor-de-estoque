@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { ItemContext } from "../../Hooks/ItemsContext"
 import style from "./Stock.module.css"
@@ -24,6 +24,7 @@ export default function ItemList() {
     setIndentifyer(currentItem.id)
   }
 
+
   useEffect(() => {
     localStorage.setItem("stock", JSON.stringify(stock))
   }, [stock]);
@@ -47,7 +48,7 @@ export default function ItemList() {
               <td>{item.name}</td>
               <td>{item.quantity}</td>
               <td>{item.category}</td>
-              <td>
+              <td className={style.itemBtn}>
                 <Link to={`${item.id}`}>
                   <button className={style.blueBtn}>
                     ver
@@ -60,6 +61,16 @@ export default function ItemList() {
                   </button>
                 </Link>
                 <button className={style.redBtn} onClick={() => deleteItem(item.id)}>excluir</button>
+              </td>
+
+              <td>
+                <Link to={`${item.id}`}>
+                  <div className={style.menuBtn}> {/*botões ocultos para mobile*/}
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </Link>
               </td>
             </tr>
           )) : (
