@@ -30,7 +30,7 @@ export default function Dashboard() {
         <div className={style.stockInfo}>
           <p>diversidade de itens </p>
           <div>
-            <span>53{/* {Object.keys(uniqueCategories).length} */}</span>
+            <span>{Object.keys(uniqueCategories).length}</span>
           </div>
         </div>
 
