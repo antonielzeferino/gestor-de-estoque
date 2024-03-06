@@ -141,7 +141,7 @@ tr {
     background-color: rgba(255, 255, 255, 0.24);
   }
 
-  span{
+  .menuBtn span{
     width: 5px;
     height: 5px;
     background-color: #fff;

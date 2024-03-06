@@ -22,15 +22,15 @@ export default function Dashboard() {
     return differenceInDays <= 10
   });
   //86400000 numero referente ao dia em milissegundos 
- 
+
   return (
     <div id={style.Dashboard}>
       <h3>Dashboard</h3>
       <div className={style.infoBlocks}>
         <div className={style.stockInfo}>
-          <p>diversidade<span> de itens </span></p>
+          <p>diversidade de itens </p>
           <div>
-            <span>{Object.keys(uniqueCategories).length}</span>
+            <span>53{/* {Object.keys(uniqueCategories).length} */}</span>
           </div>
         </div>
 

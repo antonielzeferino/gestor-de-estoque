@@ -10,12 +10,12 @@ export default function Stock() {
       <h3>Stock Items</h3>
       <div id={style.StockHeader}>
         <nav>
-          <p className={location.pathname === "/Stock/items" ? style.activeLink : ""}>
+          <p className={location.pathname === "/stock/items" ? style.activeLink : ""}>
             <Link to="items"
               style={{ textDecoration: "none" }}
             >Todos os items</Link>
           </p>
-          <p className={location.pathname === "/Stock/add" ? style.activeLink : ""}>
+          <p className={location.pathname === "/stock/add" ? style.activeLink : ""}>
             <Link to="add"  
               style={{ textDecoration: "none" }}
             >Novo item </Link>
