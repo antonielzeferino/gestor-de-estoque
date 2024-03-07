@@ -1,11 +1,10 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import style from "./style.module.css"
 import { ItemContext } from "../../Hooks/ItemsContext"
 import { Link, useParams } from "react-router-dom";
 
 export default function Dashboard() {
-  const { stock } = useContext(ItemContext)
-  const { } = useParams();
+  const { stock , idiom} = useContext(ItemContext)
 
   const uniqueCategories = stock.reduce((iCateg, item) => {
     if (!iCateg[item.category]) {
@@ -14,7 +13,7 @@ export default function Dashboard() {
     return iCateg;
   }, {});
   const totalItems = stock.reduce((total, item) => (total + Number(item.quantity)), 0);
-  const runningOut = stock.filter((item) => item.quantity <= 10 && item.quantity !== 0 )
+  const runningOut = stock.filter((item) => item.quantity <= 10 && item.quantity !== 0)
   const recentItems = stock.filter(item => {
     const creationDate = new Date(Date.parse(item.creationDate))
     const today = new Date();
@@ -28,28 +27,30 @@ export default function Dashboard() {
       <h3>Dashboard</h3>
       <div className={style.infoBlocks}>
         <div className={style.stockInfo}>
-          <p>diversidade de itens </p>
+          <p>
+            {idiom ? "diversidade de itens" : "diversity of items"}
+          </p>
           <div>
             <span>{Object.keys(uniqueCategories).length}</span>
           </div>
         </div>
 
         <div className={style.stockInfo}>
-          <p>inventario total</p>
+          <p>{idiom ? "inventario total" : "total inventory"}</p>
           <div>
             <span>{totalItems}</span>
           </div>
         </div>
 
         <div className={style.stockInfo}>
-          <p>items recentes</p>
+          <p>{idiom ? "itens recentes" : "recent items"}</p>
           <div>
             <span>{recentItems.length}</span>
           </div>
         </div>
 
         <div className={style.stockInfo}>
-          <p>items acabando</p>
+          <p>{idiom ? "itens acabando" : "running out items"}</p>
           <div>
             <span>{runningOut.length}</span>
           </div>
@@ -59,9 +60,9 @@ export default function Dashboard() {
         <table id={style.runningOutItems}>
           <thead>
             <tr>
-              <th>items recentes</th>
-              <th>quantidade</th>
-              <th>Ação</th>
+              <th>{idiom ? "itens recentes" : "recent items"}</th>
+              <th>{idiom ? "quantidade" : "quantity"}</th>
+              <th>{idiom ? "ação" : "action"}</th>
             </tr>
           </thead>
           <tbody>
@@ -73,13 +74,13 @@ export default function Dashboard() {
                   <Link
                     to={`../Stock/items/${item.id}`}
                   >
-                    <button> Ver </button>
+                    <button> {idiom ? "ver" : "view"} </button>
                   </Link>
                 </td>
               </tr>
             )) : (
               <tr>
-                <td>nenhum item recente</td>
+                <td>{idiom ? "nenhum item recente" : "no recent item, try to edd one!"}</td>
               </tr>
             )}
           </tbody>
@@ -88,9 +89,9 @@ export default function Dashboard() {
         <table id={style.lastItems}>
           <thead>
             <tr>
-              <th>items acabando</th>
-              <th>quantidade</th>
-              <th>Ação</th>
+              <th>{idiom ? "itens acabando" : "runnin out items"}</th>
+              <th>{idiom ? "quantidade" : "quantity"}</th>
+              <th>{idiom ? "ação" : "action"}</th>
             </tr>
           </thead>
           <tbody>
@@ -102,13 +103,13 @@ export default function Dashboard() {
                   <Link
                     to={`../Stock/items/${item.id}`}
                   >
-                    <button> Ver </button>
+                    <button> {idiom ? "ver" : "view"} </button>
                   </Link>
                 </td>
               </tr>
             )) : (
               <tr>
-                <td>nenhum item recente</td>
+                <td>{idiom ? "nenhum item recente" : "no recent item"}</td>
               </tr>
             )}
           </tbody>

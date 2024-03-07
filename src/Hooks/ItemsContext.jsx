@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 const ItemContext = createContext();
 
@@ -7,6 +7,8 @@ const ItemContextProvider = ({ children }) => {
   const [stock, setStock] = useState(stockItems ? JSON.parse(stockItems) : [])
   const [itemId, setItemId] = useState("")
   const [indentifyer, setIndentifyer] = useState("")
+  const [idiom, setIdiom] = useState(false)
+
   const [itemState, setItemState] = useState({
     name: '',
     quantity: 0,
@@ -35,7 +37,8 @@ const ItemContextProvider = ({ children }) => {
       stock, setStock,
       getId, itemId,
       stockItems,
-      indentifyer, setIndentifyer
+      indentifyer, setIndentifyer,
+      idiom, setIdiom
     }}>
       {children}
     </ItemContext.Provider>

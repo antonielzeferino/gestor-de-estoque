@@ -1,8 +1,10 @@
 import { Link, Outlet, useLocation } from "react-router-dom"
 import style from "./style.module.css"
+import { useContext } from "react";
+import { ItemContext } from "../../Hooks/ItemsContext";
 
 export default function Stock() {
-
+  const { idiom } = useContext(ItemContext)
   const location = useLocation();
 
   return (
@@ -13,12 +15,12 @@ export default function Stock() {
           <p className={location.pathname === "/stock/items" ? style.activeLink : ""}>
             <Link to="items"
               style={{ textDecoration: "none" }}
-            >Todos os items</Link>
+            >{idiom ? "Todos os itens" : "All items"}</Link>
           </p>
           <p className={location.pathname === "/stock/add" ? style.activeLink : ""}>
             <Link to="add"  
               style={{ textDecoration: "none" }}
-            >Novo item </Link>
+            >{idiom ? "Novo item" : "Add item"} </Link>
           </p>
         </nav>
         <hr style={{ border: "1px solid gray" }} />

@@ -4,7 +4,7 @@ import { ItemContext } from "../../Hooks/ItemsContext"
 import style from "./Stock.module.css"
 
 export default function ItemList() {
-  const { stock, setStock, setItemState, setIndentifyer } = useContext(ItemContext)
+  const { stock, setStock, setItemState, setIndentifyer, idiom } = useContext(ItemContext)
 
   const deleteItem = (id) => {
     const newStock = stock.filter((item) => item.id !== id)
@@ -35,10 +35,10 @@ export default function ItemList() {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nome</th>
-            <th>Em estoque</th>
-            <th>Categoria</th>
-            <th>Ações</th>
+            <th>{idiom ? "Nome" : "Name"}</th>
+            <th>{idiom ? "Em estoque" : "Stock"}</th>
+            <th>{idiom ? "Categoria" : "Category"}</th>
+            <th>{idiom ? "Ações" : "Actions"}</th>
           </tr>
         </thead>
         <tbody>
@@ -51,13 +51,13 @@ export default function ItemList() {
               <td className={style.itemBtn}>
                 <Link to={`${item.id}`}>
                   <button className={style.blueBtn}>
-                    ver
+                  {idiom ? "Ver" : "View"}
                   </button>
                 </Link>
 
                 <Link to={"../edit"}>
                   <button className={style.whiteBtn} onClick={() => editItem(item.id)}>
-                    editar
+                  {idiom ? "Editar" : "Edit"}
                   </button>
                 </Link>
                 <button className={style.redBtn} onClick={() => deleteItem(item.id)}>excluir</button>
@@ -75,7 +75,7 @@ export default function ItemList() {
             </tr>
           )) : (
             <tr>
-              <td>nenhum item disponivel</td>
+              <td>{idiom ? "nenhum item disponível" : "no items avaliable"}</td>
             </tr>
           )}
         </tbody>

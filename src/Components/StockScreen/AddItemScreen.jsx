@@ -7,18 +7,19 @@ import getDate from "../../Hooks/getCreationDate";
 
 export default function AddItemScreen({ editMode }) {
   const location = useLocation();
-  const [saveBtn, setSaveBtn] = useState("salvar");
   const {
-
     itemState, setItemState,
     stock, setStock,
     getId, itemId,
-    indentifyer, setIndentifyer
+    indentifyer, setIndentifyer,
+    idiom
 
   } = useContext(ItemContext)
+  
+  const [saveBtn, setSaveBtn] = useState(idiom ? "Salvar" : "Save");
 
   const handleChange = (el) => {
-    setSaveBtn("salvar")
+    setSaveBtn( idiom ? "Salvar" : "Save" )
     setItemState({
       ...itemState,
       [el.name]: el.value
@@ -27,7 +28,7 @@ export default function AddItemScreen({ editMode }) {
 
   const handleSubmit = (ev) => {
     ev.preventDefault()
-    setSaveBtn("salvo")
+    setSaveBtn(idiom ? "Salvo" : "Saved")
     if (editMode) {
       const editItem = stock.find((item) => item.id === indentifyer)
       editItem.name = itemState.name
@@ -80,7 +81,7 @@ export default function AddItemScreen({ editMode }) {
         id: '',
       })
     }
-    setSaveBtn("salvar")
+    setSaveBtn(idiom ? "Salvar" : "Save")
     localStorage.setItem("stock", JSON.stringify(stock))
   }, [stock, location]);
 
@@ -91,43 +92,51 @@ export default function AddItemScreen({ editMode }) {
       <form onSubmit={(ev) => handleSubmit(ev)}>
         <div id={style.upValues}>
           <div>
-            <label htmlFor="itemName">Nome: </label><br />
+            <label htmlFor="itemName">{idiom ? "Nome" : "Name"}: </label><br />
             <input type="text" id="itemName" name="name" required
               value={itemState.name}
               onChange={(el) => handleChange(el.target)}
             />
           </div>
           <div>
-            <label htmlFor="itemQnt">Quantidade: </label><br />
+            <label htmlFor="itemQnt">{idiom ? "Quantidade" : "Quantity"}: </label><br />
             <input type="number" id="itemQnt" min={0} name="quantity"
               value={itemState.quantity}
               onChange={(el) => handleChange(el.target)}
             />
           </div>
           <div>
-            <label htmlFor="itemPrice">Preço: </label><br />
+            <label htmlFor="itemPrice">{idiom ? "Preço" : "Price"}: </label><br />
             <input type="number" id="itemPrice" min={0} name="price"
               value={itemState.price}
               onChange={(el) => handleChange(el.target)}
             />
           </div>
           <div>
-            <label htmlFor="itemCategory">Categoria: </label><br />
+            <label htmlFor="itemCategory">{idiom ? "Categoria" : "Category"}: </label><br />
             <select id="itemCategory" name="category" required
               value={itemState.category}
               onChange={(el) => handleChange(el.target)}
             >
-              <option value="" >Selecione uma categoria</option>
-              <option value="Jogos">Jogo</option>
-              <option value="Livros">Livro</option>
-              <option value="Eletronicos">Eletrônico</option>
+              <option value="" >{idiom ? "Selecione uma categoria" : "Select a category"}</option>
+              <option value={idiom ? "Jogos" : "Games"}>
+                {idiom ? "Jogo" : "Game"}
+              </option>
+              <option value={idiom ? "Livros" : "Books"}>
+                {idiom ? "Livro" : "Book"}
+              </option>
+              <option value={idiom ? "Eletrônicos" : "Eletronics"}>
+                {idiom ? "Eletrônico" : "Eletronic"}
+              </option>
               <option value="Perfumes">Perfume</option>
-              <option value="Domésticos">Doméstico</option>
+              <option value={idiom ? "Domésticos" : "Domestics"}>
+                {idiom ? "Doméstico" : "Domestic"}
+              </option>
             </select>
           </div>
         </div>
         <div id={style.downValues}>
-          <label htmlFor="itemDesc">Descrição: </label>
+          <label htmlFor="itemDesc">{idiom ? "Descrição" : "Description"}: </label>
           <textarea id="itemDesc" cols="30" rows="10" name="description"
             value={itemState.description}
             onChange={(el) => handleChange(el.target)}

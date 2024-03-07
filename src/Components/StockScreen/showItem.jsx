@@ -5,7 +5,7 @@ import { Link, useLocation, useParams } from "react-router-dom";
 
 export default function ShowItem() {
   const location = useLocation()
-  const { stock, setItemState, setIndentifyer, setStock } = useContext(ItemContext);
+  const { stock, setItemState, setIndentifyer, setStock, idiom } = useContext(ItemContext);
   const { itemId } = useParams();
   const [deleted, setDeleted] = useState(false);
   const selectedItem = stock.find((item) => item.id === itemId);
@@ -43,33 +43,39 @@ export default function ShowItem() {
               <p className={style.itemName} >{selectedItem.name}</p>
               <div>
                 <Link to={"../edit"}>
-                  <button className={style.whiteBtn} onClick={() => editItem(selectedItem.id)}>Editar</button>
+                  <button className={style.whiteBtn} onClick={() => editItem(selectedItem.id)}>
+                    {idiom ? "Editar" : "Edit"}
+                  </button>
                 </Link>
-                <button className={style.redBtn} onClick={() => deleteItem(selectedItem.id)}>Excluir</button>
+                <button className={style.redBtn} onClick={() => deleteItem(selectedItem.id)}>
+                  {idiom ? "Excluir" : "Delete"}
+                </button>
               </div>
             </div>
             <div className={style.infoItem}>
-              <div className={style.infoBlock}>Categoria: {selectedItem.category}</div>
-              <div className={style.infoBlock}>Quantidade em estoque: {selectedItem.quantity}</div>
-              <div className={style.infoBlock}>Preço: R${selectedItem.price}</div>
+              <div className={style.infoBlock}>{idiom ? "Categoria" : "Category"}: {selectedItem.category}</div>
+              <div className={style.infoBlock}>{idiom ? "Quantidade em estoque" : "Stock quantity"}: {selectedItem.quantity}</div>
+              <div className={style.infoBlock}>{idiom ? "Preço: R$" : "Price: $"}{selectedItem.price}</div>
             </div>
             <p>{selectedItem.description}</p>
-            <p>criado em {selectedItem.creationDate}</p> 
-            {selectedItem.editDate ? <p>atualizado em {selectedItem.editDate}</p> : <p></p> }
-            
+            <p>{idiom ? "Criado em " : "Created in "} {selectedItem.creationDate}</p>
+            {selectedItem.editDate ? <p>{idiom ? "Atualizado em " : "Last update "}{selectedItem.editDate}</p> : <p></p>}
+
           </div>
         ) : deleted ? (
           <div>
-            <p>O item foi excluído com sucesso!</p>
+            <p>{idiom ? "O item foi excluido com sucesso!" : "The item was successfully deleted!"}</p>
             <Link to={"../items"}>
-              <button className={style.blueBtn}>Voltar</button>
+              <button className={style.blueBtn}>
+                {idiom ? "Voltar" : "Back"}
+              </button>
             </Link>
           </div>
         ) : (
           <div>
-            <h4>Item não encontrado</h4>
+            <h4>{idiom ? "Itemd não encontrado" : "Item not found"}</h4>
             <Link to={"../items"}>
-              <button className={style.blueBtn}>Voltar</button>
+              <button className={style.blueBtn}>{idiom ? "Voltar" : "Back"}</button>
             </Link>
           </div>
         )

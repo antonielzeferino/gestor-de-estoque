@@ -19,3 +19,23 @@ button {
   border: 0;
   border-radius: 5px;
 }
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  height: 8vh;
+  width: 95%;
+  position: fixed;
+  bottom:  0;
+  padding-right: 10px;
+}
+
+@media (max-width: 768px) {
+  footer{
+    height: max-content;
+    position: relative;
+    bottom: -30px;
+  }
+}
